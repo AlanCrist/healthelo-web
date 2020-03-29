@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
@@ -12,6 +12,8 @@ import logoImg from "../../assets/logo.svg";
 
 export default function Profile() {
   const [incidents, setIncidents] = useState([]);
+
+  const history = useHistory();
 
   const hospitalId = localStorage.getItem("hospitalId");
   const hospitalName = localStorage.getItem("hospitalName");
@@ -35,11 +37,16 @@ export default function Profile() {
           Authorization: hospitalId
         }
       });
-
       setIncidents(incidents.filter(incident => incident.id !== id));
     } catch (err) {
       alert("Erro ao tentar deletar caso, tente novamente.");
     }
+  }
+
+  function handleLogout() {
+    localStorage.clear();
+
+    history.push("/");
   }
 
   return (
@@ -51,7 +58,7 @@ export default function Profile() {
         <Link className="button" to="/incidents/new">
           Cadastrar novo caso
         </Link>
-        <button type="button">
+        <button onClick={handleLogout} type="button">
           <PowerSettingsNewIcon style={{ color: "#1c2f5d", fontSize: 22 }} />
         </button>
       </header>
