@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 import "./styles.css";
@@ -21,10 +21,10 @@ export default function Logon() {
             Entrar
           </button>
 
-          <a href="/register">
+          <Link className="back-link" to="/register">
             <ExitToAppIcon style={{ color: "#1c2f5d", fontSize: 22 }} />
             Não tenho cadastro
-          </a>
+          </Link>
         </form>
       </section>
       <img src={peopleImg} alt="people" className="people-img" />
